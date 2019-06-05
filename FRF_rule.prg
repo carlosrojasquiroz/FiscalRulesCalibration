@@ -51,7 +51,8 @@ Endsub
 '------------------------------------------------------------------------------------------------------------------------------------------------------------
 Subroutine VARsystem
 '------------------------------------------------------------------------------------------------------------------------------------------------------------
-'Changing the name of the macroeconomic variables 
+'Changing the name of the macroeconomic variables
+series var0=gstar
 series var1=ipx 
 series var2=rme
 series var3=pbi 
