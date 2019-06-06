@@ -43,7 +43,7 @@ scalar Adj=0
 scalar Fu=0
 '------------------------------------------------------------------------------
 'h) Initial public debt
-scalar publicdebt0=25.8
+scalar publicdebt0=27.3
 'i) Debt limit
 scalar debtlimit=40
 '------------------------------------------------------------------------------
@@ -51,8 +51,7 @@ Endsub
 '------------------------------------------------------------------------------------------------------------------------------------------------------------
 Subroutine VARsystem
 '------------------------------------------------------------------------------------------------------------------------------------------------------------
-'Changing the name of the macroeconomic variables
-series var0=gstar
+'Changing the name of the macroeconomic variables 
 series var1=ipx 
 series var2=rme
 series var3=pbi 
@@ -62,8 +61,11 @@ series var5=q
 series var6=rp
 series var7=deppub
 'Changing the name of gap variables
+'You can change var9 and var9n between and GDP and non-commidity GDP
 series var8=ipx_cyc
-series var9=pbi_cyc
+series var9=pbinp_cyc
+series var8n=ipx_n
+series var9n=pbinp_n
 'Changing the name of auxiliary fiscal variables
 series var10=int
 series var11=re
@@ -95,7 +97,7 @@ Subroutine Forecasting
 '------------------------------------------------------------------------------------------------------------------------------------------------------------
 for !sim=1 to nsimul
 '------------------------------------------------------------------------------
-'Resample errors
+'Resample resids
 '------------------------------------------------------------------------------
 smpl @all
 for !x=1 to nvar+1
@@ -165,14 +167,14 @@ mat1(!obs,!sim)=x1(1)
 '-------------------------------------------------------------------------------------
 'Export prices gap (Baxter and King filter)
 '-------------------------------------------------------------------------------------
-series ipx_n=ipx_n(-4)*(1+x1(1)/100)
+series var8n=var8n(-4)*(1+x1(1)/100)
 for !j=1 to 12
 %date_2 = @otod(@dtoo("2018.4")+!obs+!j)
 smpl %date_2 %date_2
-series ipx_n=ipx_n(-1)
+series var8n=var8n(-1)
 next
 smpl @first @last
-series lipx=log(ipx_n)
+series lipx=log(var8n)
 lipx.bpf var8
 smpl %date %date
 stom(var8,x8)
@@ -199,14 +201,14 @@ mat3(!obs,!sim)=x3(1)
 '-------------------------------------------------------------------------------------
 'Output gap (Baxter and King filter)
 '-------------------------------------------------------------------------------------
-series pbi_n=pbi_n(-4)*(1+x3(1)/100)
+series var9n=var9n(-4)*(1+x3(1)/100)
 for !j=1 to 12
 %date_2 = @otod(@dtoo("2018.4")+!obs+!j)
 smpl %date_2 %date_2
-series pbi_n=pbi_n(-4)*(1+x3(1)/100)
+series var9n=var9n(-4)*(1+x3(1)/100)
 next
 smpl @first @last
-series lpbi=log(pbi_n)
+series lpbi=log(var9n)
 lpbi.bpf var9
 smpl %date %date
 stom(var9,x9)
@@ -242,7 +244,7 @@ mat11(!obs,!sim)=x11(1)
 '-------------------------------------------------------------------------------------
 'Primary balance (PB)
 '-------------------------------------------------------------------------------------
-series var6=C(25)*var6(-1)+C(26)*var6(-2)+C(27)*var8+C(28)*var9(-2)+C(29)*var7(-1)+Fu*Epsilon6
+series var6=C(25)*var6(-1)+C(26)*var6(-2)+C(27)*var8+C(28)*var9(-2)+C(29)*var7(-1)+C(30)+Fu*Epsilon6
 stom(var6,x6)
 matrix(nhorz,nsimul) mat6
 mat6(!obs,!sim)=x6(1)
