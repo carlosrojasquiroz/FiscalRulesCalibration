@@ -43,7 +43,7 @@ scalar Adj=0
 scalar Fu=0
 '------------------------------------------------------------------------------
 'h) Initial public debt
-scalar publicdebt0=27.3
+scalar publicdebt0=25.8
 'i) Debt limit
 scalar debtlimit=40
 '------------------------------------------------------------------------------
@@ -54,6 +54,9 @@ Subroutine VARsystem
 'Changing the name of the macroeconomic variables 
 series var1=ipx 
 series var2=rme
+'------------------------------------------------------------------------------
+'You can change var3 between GDP and non-commidity GDP
+'------------------------------------------------------------------------------
 series var3=pbi 
 series var4=rmn
 series var5=q
@@ -61,7 +64,9 @@ series var5=q
 series var6=rp
 series var7=deppub
 'Changing the name of gap variables
-'You can change var9 and var9n between and GDP and non-commidity GDP
+'------------------------------------------------------------------------------
+'You can change var9 and var9n between GDP and non-commidity GDP
+'------------------------------------------------------------------------------
 series var8=ipx_cyc
 series var9=pbinp_cyc
 series var8n=ipx_n
