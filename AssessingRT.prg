@@ -76,11 +76,11 @@ series var17=defl
 '------------------------------------------------------------------------------
 smpl 2002.1 2018.4
 system macro1
-macro1.append 		var1=C(1)*var1(-1)+C(2)*var1(-2)+C(3)
-macro1.append         var2=C(4)*var2(-1)+C(5)
-macro1.append 		var3=C(6)*var3(-1)+C(7)*var4(-1)+C(8)*var5(-1)+C(9)*var1+C(10)*var2+C(11)
-macro1.append 		var4=C(12)*var3(-1)+C(13)*var4(-1)+C(14)*var5(-1)+C(16)*var1+C(17)*var2+C(18)
-macro1.append 		var5=C(19)*var3(-1)+C(20)*var4(-1)+C(21)*var5(-1)+C(22)*var1+C(23)*var2+C(24)
+macro1.append var1=C(1)*var1(-1)+C(2)*var1(-2)+C(3)
+macro1.append var2=C(4)*var2(-1)+C(5)
+macro1.append var3=C(6)*var3(-1)+C(7)*var4(-1)+C(8)*var5(-1)+C(9)*var1+C(10)*var2+C(11)
+macro1.append var4=C(12)*var3(-1)+C(13)*var4(-1)+C(14)*var5(-1)+C(16)*var1+C(17)*var2+C(18)
+macro1.append var5=C(19)*var3(-1)+C(20)*var4(-1)+C(21)*var5(-1)+C(22)*var1+C(23)*var2+C(24)
 macro1.ls(cov=hac)
 'Making resids from the macroeconomic equations 
 macro1.makeresids resid01 resid02 resid03 resid04 resid05
@@ -171,8 +171,7 @@ endif
 '-------------------------------------------------------------------------------------
 'GDP
 '-------------------------------------------------------------------------------------
-series var3=4
-'C(6)*var3(-1)+C(7)*var4(-1)+C(8)*var5(-1)+C(9)*var1+C(10)*var2+C(11)+Epsilon3
+series var3=C(6)*var3(-1)+C(7)*var4(-1)+C(8)*var5(-1)+C(9)*var1+C(10)*var2+C(11)+Epsilon3
 stom(var3,x3)
 matrix(nhorz,nsimul) mat3
 mat3(!obs,!sim)=x3(1)
